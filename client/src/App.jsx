@@ -1,7 +1,8 @@
 import React from 'react';
+import Game from './components/Game';
 
 const App = () => (
-  <h1>Hola</h1>
+  <Game />
 );
 
 export default App;

@@ -1,6 +1,6 @@
-/* eslint-disable react/jsx-no-undef */
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import Square from '../Square';
 import './style.scss';
 
 const Board = ({ squares, onClick, turn }) => {

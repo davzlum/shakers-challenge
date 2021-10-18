@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Board from '../Board';
+import { updateRanking, loadRanking } from '../../redux/actions/actionCreators';
 import './style.scss';
 
 const Game = () => {
+  const dispatch = useDispatch();
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState('X');
   const [resultText, setResultText] = useState('');
+  const [isEndGame, setIsEndGame] = useState(false);
+
   const [score, setScore] = useState({
     X: 0,
     O: 0,
   });
 
+  const ranking = useSelector((store) => store.rankingReducer);
+  useEffect(() => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    dispatch(loadRanking());
+  }, [isEndGame]);
+
   const reset = () => {
     setTurn('X');
     setSquares(Array(9).fill(null));
     setResultText('');
+  //  setIsEndGame(false);
   };
 
   const endGame = (result) => {
+    dispatch(updateRanking(result, ranking));
     setTurn(null);
+    setIsEndGame(true);
+    console.log(ranking);
     if (result) {
       setScore({
         ...score,
@@ -31,7 +48,8 @@ const Game = () => {
 
   async function checkForWinner(newSquares) {
     try {
-      const { data } = await axios.put('http://localhost:2025/results', { newSquares });
+      const { data } = await axios.post('http://localhost:2025/results', { newSquares });
+      console.log(data);
       if (data.isWinner) {
         endGame(data.player);
         setResultText(
@@ -77,6 +95,7 @@ const Game = () => {
           )
           : <>{resultText}</>}
       </div>
+      <Link to="/ranking">Show Ranking</Link>
     </div>
   );
 };

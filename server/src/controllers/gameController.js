@@ -1,6 +1,7 @@
 const debug = require('debug')('app:gameController');
 const winningPositions = require('../const/winningPositions');
 const Result = require('../model/resultModel');
+const Ranking = require('../model/rankingModel');
 
 function GameController() {
   async function checkForWinner(req, res) {
@@ -39,8 +40,19 @@ function GameController() {
       debug(error);
     }
   }
+  async function getRanking(req, res) {
+    try {
+      const ranking = await Ranking.find();
+      res.json(ranking);
+    } catch (error) {
+      debug(error);
+      res.send(error);
+      res.status(404);
+    }
+  }
   return {
     checkForWinner,
+    getRanking,
   };
 }
 module.exports = GameController;

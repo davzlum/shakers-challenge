@@ -1,0 +1,18 @@
+.score-board{
+    width: 320px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    div {
+        width: 100%;
+        color: white;
+        text-align: center;
+        font-size: 2em;
+        padding: 5px;
+        font-weight: bold;
+        background-color: #24cbe9;
+    }
+    div:first-child{
+        background-color: #ebc908;
+    }
+}

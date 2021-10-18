@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const debug = require('debug')('app');
 const cors = require('cors');
 const morgan = require('morgan');
+const gameRoutes = require('./routes/gameRoutes');
 
 require('dotenv').config();
 
@@ -21,6 +22,8 @@ app.use(morgan('dev'));
 require('./ddbb/mongoose.config');
 
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/', gameRoutes);
 
 app.listen(port,
   () => debug(`Server is running in ${chalk.magentaBright(`localhost:${port}`)}`));

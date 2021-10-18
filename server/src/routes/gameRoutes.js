@@ -7,6 +7,9 @@ function gameRoutes() {
   routes
     .route('/results')
     .put(gameController.checkForWinner);
+  routes
+    .route('/rankings')
+    .put(gameController.getRanking);
 
   return routes;
 }

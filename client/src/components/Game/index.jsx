@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Board from '../Board';
 import './style.scss';
-
-const winningPositions = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
 
 const Game = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
@@ -39,12 +29,11 @@ const Game = () => {
     setTimeout(() => { reset(); }, 2000);
   };
 
-  const checkForWinner = (newSquares) => {
-    winningPositions.forEach((position) => {
-      const [top, center, bottom] = position;
-      if (newSquares[top]
-          && newSquares[top] === newSquares[center] && newSquares[top] === newSquares[bottom]) {
-        endGame(newSquares[top]);
+  async function checkForWinner(newSquares) {
+    try {
+      const { data } = await axios.put('http://localhost:2025/results', { newSquares });
+      if (data.isWinner) {
+        endGame(data.player);
         setResultText(
           <>
             <h2>Player</h2>
@@ -54,21 +43,22 @@ const Game = () => {
             <h2>Wins!</h2>
           </>,
         );
+      } else if (data.isTie) {
+        endGame(null);
+        setResultText(<h2>Tie!</h2>);
+        return;
       }
-    });
-    if (!newSquares.includes(null)) {
-      endGame(null);
-      setResultText(<h2>Tie!</h2>);
-      return;
+    } catch (error) {
+      console.error(error);
     }
-    setTurn(turn === 'X' ? 'O' : 'X');
-  };
+  }
 
   const handleClick = (square) => {
     const newSquares = [...squares];
     newSquares.splice(square, 1, turn);
     setSquares(newSquares);
     checkForWinner(newSquares);
+    setTurn(turn === 'X' ? 'O' : 'X');
   };
 
   return (

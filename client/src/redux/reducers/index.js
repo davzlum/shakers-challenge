@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import rankingReducer from './rankingReducer';
+import ranking from './rankingReducer';
+import message from './messageReducer';
 
 const rootReducer = combineReducers({
-  rankingReducer,
+  ranking,
+  message,
 });
 
 export default rootReducer;

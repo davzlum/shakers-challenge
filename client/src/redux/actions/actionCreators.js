@@ -32,3 +32,12 @@ export function updateRanking(player, ranking) {
     }
   };
 }
+
+export function handleError(errorMessage) {
+  return async (dispatch) => {
+    dispatch({
+      type: actionTypes.COMMON_ERROR,
+      message: { errorMessage, isError: true },
+    });
+  };
+}

@@ -6,11 +6,11 @@ function gameRoutes() {
 
   routes
     .route('/results')
-    .put(gameController.checkForWinner);
+    .post(gameController.getWinner);
   routes
     .route('/rankings')
     .get(gameController.getRanking)
-    .put(gameController.updateRanking);
+    .post(gameController.updateRanking);
 
   return routes;
 }

@@ -17,10 +17,10 @@ export function loadRanking() {
   };
 }
 
-export function updateRanking(player) {
+export function updateRanking(player, ranking) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('http://localhost:2025/rankings', { player });
+      const { data } = await axios.post('http://localhost:2025/rankings', { player, ranking });
       dispatch({
         type: actionTypes.UPDATE_RANKING,
         ranking: data,

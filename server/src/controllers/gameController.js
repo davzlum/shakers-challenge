@@ -1,48 +1,23 @@
 const debug = require('debug')('app:gameController');
-const winningPositions = require('../const/winningPositions');
-const Result = require('../model/resultModel');
 const Ranking = require('../model/rankingModel');
+const { checkForWinner } = require('../helpers/game.helper');
 
 function GameController() {
-  async function checkForWinner(req, res) {
+  async function getWinner(req, res) {
     try {
-      let result = {
-        isWinner: false,
-        isTie: false,
-        player: '',
-      };
       const { newSquares } = req.body;
-      winningPositions.forEach((position) => {
-        const [top, center, bottom] = position;
-        if (newSquares[top] && newSquares[top] === newSquares[center]
-        && newSquares[top] === newSquares[bottom]) {
-          result = {
-            isWinner: true,
-            isTie: false,
-            player: newSquares[top],
-          };
-        }
-      });
-      if (!newSquares.includes(null)) {
-        result = {
-          isWinner: false,
-          isTie: true,
-          player: '',
-        };
-      }
-      const resultData = await Result.findByIdAndUpdate(
-        '616d3855d0048d06aa4c1f92', { $set: result }, { new: true },
-      );
-      res.json(resultData);
+      const winner = checkForWinner(newSquares);
+      res.json(winner);
     } catch (error) {
       res.status(404);
       res.send(error);
       debug(error);
     }
   }
+
   async function getRanking(req, res) {
     try {
-      const ranking = await Ranking.find();
+      const ranking = await Ranking.findById('616d6907d0048d06aa4c1fb3');
       res.json(ranking);
     } catch (error) {
       debug(error);
@@ -50,9 +25,65 @@ function GameController() {
       res.status(404);
     }
   }
+
+  async function updateRanking(req, res) {
+    try {
+      const { player, ranking } = req.body;
+      const updateObject = () => {
+        if (player === 'X') {
+          return {
+            playerX: {
+              won: ranking.playerX.won + 1,
+              lost: ranking.playerX.lost,
+              tied: ranking.playerX.tied,
+            },
+            playerO: {
+              won: ranking.playerO.won,
+              lost: ranking.playerO.lost + 1,
+              tied: ranking.playerO.tied,
+            },
+          };
+        }
+        if (player === 'O') {
+          return {
+            player0: {
+              won: ranking.playerX.won + 1,
+              lost: ranking.playerX.lost,
+              tied: ranking.playerX.tied,
+            },
+            playerX: {
+              won: ranking.playerO.won,
+              lost: ranking.playerO.lost + 1,
+              tied: ranking.playerO.tied,
+            },
+          };
+        }
+        return {
+          player0: {
+            won: ranking.playerX.won,
+            lost: ranking.playerX.lost,
+            tied: ranking.playerX.tied + 1,
+          },
+          playerX: {
+            won: ranking.playerO.won,
+            lost: ranking.playerO.lost,
+            tied: ranking.playerO.tied + 1,
+          },
+        };
+      };
+      const newRanking = await Ranking.findByIdAndUpdate('616d6907d0048d06aa4c1fb3', updateObject(), { new: true });
+      res.json(newRanking);
+    } catch (error) {
+      debug(error);
+      res.send(error);
+      res.status(404);
+    }
+  }
+
   return {
-    checkForWinner,
+    getWinner,
     getRanking,
+    updateRanking,
   };
 }
 module.exports = GameController;

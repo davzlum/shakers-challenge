@@ -22,14 +22,13 @@ const Game = () => {
   const message = useSelector((store) => store.message);
 
   useEffect(() => {
-    dispatch(loadRanking());
+    if (!ranking.playerX) dispatch(loadRanking());
   }, []);
 
   const reset = () => {
     setTurn('X');
     setSquares(Array(9).fill(null));
     setResultText('');
-    console.log(ranking);
   };
 
   const endGame = (result) => {

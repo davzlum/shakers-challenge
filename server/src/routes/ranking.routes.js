@@ -6,8 +6,8 @@ function rankingsRoutes() {
 
   routes
     .route('/')
-    .get(rankingController.getRanking)
-    .post(rankingController.updateRanking);
+    .post(rankingController.createRanking)
+    .put(rankingController.updateRanking);
 
   return routes;
 }

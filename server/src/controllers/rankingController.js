@@ -2,10 +2,24 @@ const debug = require('debug')('app:rankingController');
 const Ranking = require('../model/rankingModel');
 
 function rankingController() {
-  async function getRanking(req, res) {
+  async function createRanking(req, res) {
+    const newRanking = new Ranking(
+      {
+        playerX: {
+          won: 0,
+          lost: 0,
+          tied: 0,
+        },
+        playerO: {
+          won: 0,
+          lost: 0,
+          tied: 0,
+        },
+      },
+    );
     try {
-      const ranking = await Ranking.findById('616d6907d0048d06aa4c1fb3');
-      res.json(ranking);
+      await newRanking.save();
+      res.json(newRanking);
     } catch (error) {
       debug(error);
       res.send(error);
@@ -37,7 +51,8 @@ function rankingController() {
           playerO: { ...ranking.playerO, tied: ranking.playerO.tied + 1 },
         };
       };
-      const newRanking = await Ranking.findByIdAndUpdate('616d6907d0048d06aa4c1fb3', updateObject(), { new: true });
+      const newRanking = await Ranking
+        .findByIdAndUpdate(ranking._id, updateObject(), { new: true });
       res.json(newRanking);
     } catch (error) {
       debug(error);
@@ -47,7 +62,7 @@ function rankingController() {
   }
 
   return {
-    getRanking,
+    createRanking,
     updateRanking,
   };
 }

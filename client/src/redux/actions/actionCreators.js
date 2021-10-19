@@ -1,10 +1,12 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 
+const url = process.env.REACT_APP_URL;
+
 export function loadRanking() {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post('http://localhost:2025/rankings');
+      const { data } = await axios.post(`${url}/rankings`);
       dispatch({
         type: actionTypes.LOAD_RANKING,
         ranking: data,
@@ -20,7 +22,7 @@ export function loadRanking() {
 export function updateRanking(player, ranking) {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put('http://localhost:2025/rankings', { player, ranking });
+      const { data } = await axios.put(`${url}/rankings`, { player, ranking });
       dispatch({
         type: actionTypes.UPDATE_RANKING,
         ranking: data,

@@ -7,6 +7,8 @@ import ScoreBoard from '../ScoreBoard';
 import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
+const url = process.env.REACT_APP_URL;
+
 const Game = () => {
   const dispatch = useDispatch();
   const [squares, setSquares] = useState(Array(9).fill(null));
@@ -45,7 +47,7 @@ const Game = () => {
 
   async function checkForWinner(newSquares) {
     try {
-      const { data } = await axios.post('http://localhost:2025/results', { newSquares });
+      const { data } = await axios.post(`${url}/results`, { newSquares });
       if (data.isWinner) {
         endGame(data.player);
         setResultText(

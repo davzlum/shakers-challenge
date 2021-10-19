@@ -1,10 +1,11 @@
+@import './../../styles/color.scss';
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #220036;
 }
 
 .turn-board{
@@ -15,18 +16,13 @@
     align-items: center;
     margin: 10px 0;
     h2{
-        color: white;
+        color: $color-text;
     }
-    .player-X{
-        width: 50px;
-        height: 50px;
-        background-color: #cd493A;
-        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
-    }   
-    .player-O{
-        width: 50px;
-        height: 50px;
-        background-color: #4392f1;
-        border-radius: 50%;
-    } 
+}
+.button {
+    font-size: 22px;
+    margin-top: 50px;
+    padding: 15px 30px;
+    background-color: $color-button;
+    color: $color-text;
 }

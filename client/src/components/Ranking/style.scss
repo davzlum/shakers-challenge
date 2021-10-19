@@ -1,0 +1,41 @@
+.ranking-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh;
+}
+
+.ranking-table{
+    font-size: 22px;
+    border-spacing: 0;
+    th, td{
+    text-align: center;
+    width: 120px;
+    height: 100px;
+    }
+    .row-category{
+        background-color: #5a5a5a;
+    }
+    .player-x{
+        background-color: #ebc908;
+    }
+    .player-o{
+        background-color: #24cbe9;
+    }
+    .icon-x{
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        background-color: #ebc908;
+        clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+    }
+    .icon-o{
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #24cbe9;
+    }
+}
+

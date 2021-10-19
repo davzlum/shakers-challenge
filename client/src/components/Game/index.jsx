@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Board from '../Board';
 import ScoreBoard from '../ScoreBoard';
+import ConsoleBoard from '../ConsoleBoard';
 import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
@@ -14,11 +15,6 @@ const Game = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState('X');
   const [resultText, setResultText] = useState('');
-
-  const [score, setScore] = useState({
-    X: 0,
-    O: 0,
-  });
 
   const ranking = useSelector((store) => store.ranking);
   const message = useSelector((store) => store.message);
@@ -36,12 +32,6 @@ const Game = () => {
   const endGame = (result) => {
     dispatch(updateRanking(result, ranking));
     setTurn(null);
-    if (result) {
-      setScore({
-        ...score,
-        [result]: score[result] + 1,
-      });
-    }
     setTimeout(() => { reset(); }, 2000);
   };
 
@@ -51,17 +41,13 @@ const Game = () => {
       if (data.isWinner) {
         endGame(data.player);
         setResultText(
-          <>
-            <h2>Player</h2>
-            {' '}
-            <div className={`player-${turn}`} />
-            {' '}
-            <h2>Wins!</h2>
-          </>,
+          <ConsoleBoard turn={turn} />,
         );
       } else if (data.isTie) {
         endGame(null);
-        setResultText(<h2>Tie!</h2>);
+        setResultText(
+          <ConsoleBoard turn={null} />,
+        );
         return;
       }
     } catch (errorCheck) {
@@ -79,29 +65,31 @@ const Game = () => {
 
   return (
     <>
-      {!message.errorMessage ? (
-        <div className="container">
-          <Board turn={turn} squares={squares} onClick={handleClick} />
-          <div className="turn-board">
-            {!resultText
-              ? (
-                <>
-                  <h2>
-                    Next Player:
-                    {' '}
-                  </h2>
-                  <div className={turn === 'X' ? 'player-X' : 'player-O'} />
-                </>
-              )
-              : <>{resultText}</>}
-          </div>
-          <ScoreBoard
-            scoreO={ranking.playerO ? ranking.playerO.won : 0}
-            scoreX={ranking.playerX ? ranking.playerX.won : 0}
-          />
-          <Link to="/ranking">Show Ranking</Link>
-        </div>
-      ) : <div>{message.errorMessage}</div>}
+      <div className="container">
+        {!message.errorMessage ? (
+          <>
+            <Board turn={turn} squares={squares} onClick={handleClick} />
+            <div className="turn-board">
+              {!resultText
+                ? (
+                  <>
+                    <h2>
+                      Next Player:
+                      {' '}
+                    </h2>
+                    <div className={turn === 'X' ? 'player-X' : 'player-O'} />
+                  </>
+                )
+                : <>{resultText}</>}
+            </div>
+            <ScoreBoard
+              scoreO={ranking.playerO ? ranking.playerO.won : 0}
+              scoreX={ranking.playerX ? ranking.playerX.won : 0}
+            />
+            <Link to="/ranking"><div className="button">Show Ranking</div></Link>
+          </>
+        ) : <div>{message.errorMessage}</div>}
+      </div>
     </>
 
   );

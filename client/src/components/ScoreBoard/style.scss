@@ -1,3 +1,5 @@
+@import './../../styles/color.scss';
+
 .score-board{
     width: 320px;
     display: flex;
@@ -5,14 +7,14 @@
     margin-top: 5px;
     div {
         width: 100%;
-        color: white;
+        color: $color-text;
         text-align: center;
         font-size: 2em;
         padding: 5px;
         font-weight: bold;
-        background-color: #24cbe9;
+        background-color: $color-player-o;
     }
     div:first-child{
-        background-color: #ebc908;
+        background-color: $color-player-x;
     }
 }

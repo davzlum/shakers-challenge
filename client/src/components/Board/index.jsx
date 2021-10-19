@@ -30,7 +30,9 @@ const Board = ({ squares, onClick, turn }) => {
 };
 
 Board.propTypes = {
-  squares: PropTypes.shape([]).isRequired,
+  squares: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
   onClick: PropTypes.func.isRequired,
   turn: PropTypes.string.isRequired,
 };

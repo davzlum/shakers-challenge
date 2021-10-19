@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Board from '../Board';
 import ScoreBoard from '../ScoreBoard';
-import ConsoleBoard from '../ConsoleBoard';
+import GameStatus from '../GameStatus';
 import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
@@ -41,12 +41,12 @@ const Game = () => {
       if (data.isWinner) {
         endGame(data.player);
         setResultText(
-          <ConsoleBoard turn={turn} />,
+          <GameStatus turn={turn} isEndGame />,
         );
       } else if (data.isTie) {
         endGame(null);
         setResultText(
-          <ConsoleBoard turn={null} />,
+          <GameStatus turn={null} isEndGame />,
         );
         return;
       }
@@ -72,13 +72,7 @@ const Game = () => {
             <div className="turn-board">
               {!resultText
                 ? (
-                  <>
-                    <h2>
-                      Next Player:
-                      {' '}
-                    </h2>
-                    <div className={turn === 'X' ? 'player-X' : 'player-O'} />
-                  </>
+                  <GameStatus turn={turn} isEndGame={false} />
                 )
                 : <>{resultText}</>}
             </div>

@@ -5,6 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const gameRoutes = require('./routes/game.routes');
 const rankingRoutes = require('./routes/ranking.routes');
+const playRoutes = require('./routes/play.routes');
 
 require('dotenv').config();
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', gameRoutes);
 app.use('/rankings', rankingRoutes);
+app.use('/play', playRoutes);
 
 app.listen(port,
   () => debug(`Server is running in ${chalk.magentaBright(`localhost:${port}`)}`));

@@ -16,9 +16,14 @@ const Square = ({ value, onClick, turn }) => {
 };
 
 Square.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   onClick: PropTypes.func.isRequired,
-  turn: PropTypes.string.isRequired,
+  turn: PropTypes.string,
+};
+
+Square.defaultProps = {
+  turn: null,
+  value: null,
 };
 
 export default Square;

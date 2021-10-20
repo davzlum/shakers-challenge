@@ -5,6 +5,7 @@ import axios from 'axios';
 import Board from '../Board';
 import ScoreBoard from '../ScoreBoard';
 import GameStatus from '../GameStatus';
+import { player, cpu } from '../../assets/constants';
 import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
@@ -18,10 +19,6 @@ const Game = () => {
 
   const ranking = useSelector((store) => store.ranking);
   const message = useSelector((store) => store.message);
-
-  useEffect(() => {
-    if (!ranking.playerX) dispatch(loadRanking());
-  }, []);
 
   const reset = () => {
     setTurn('X');
@@ -43,13 +40,25 @@ const Game = () => {
         setResultText(
           <GameStatus turn={turn} isEndGame />,
         );
-      } else if (data.isTie) {
+        return;
+      } if (data.isTie) {
         endGame(null);
         setResultText(
           <GameStatus turn={null} isEndGame />,
         );
         return;
       }
+    } catch (errorCheck) {
+      dispatch(handleError('No data loaded'));
+    }
+    setTurn(turn === player ? cpu : player);
+  }
+
+  async function cpuPlay(actualSquares) {
+    try {
+      const { data } = await axios.post(`${url}/play`, { actualSquares });
+      setSquares(data);
+      checkForWinner(data);
     } catch (errorCheck) {
       dispatch(handleError('No data loaded'));
     }
@@ -60,8 +69,17 @@ const Game = () => {
     newSquares.splice(square, 1, turn);
     setSquares(newSquares);
     checkForWinner(newSquares);
-    setTurn(turn === 'X' ? 'O' : 'X');
   };
+
+  useEffect(() => {
+    if (!ranking.playerX) dispatch(loadRanking());
+  }, []);
+
+  useEffect(() => {
+    if (turn === cpu) {
+      setTimeout(() => { cpuPlay(squares); }, 1000);
+    }
+  }, [turn]);
 
   return (
     <>

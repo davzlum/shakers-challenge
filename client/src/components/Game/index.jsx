@@ -6,7 +6,7 @@ import Board from '../Board';
 import ScoreBoard from '../ScoreBoard';
 import GameStatus from '../GameStatus';
 import { player, cpu } from '../../assets/constants';
-import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
+import { updateRanking, createRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
 const url = process.env.REACT_APP_URL;
@@ -72,7 +72,7 @@ const Game = () => {
   };
 
   useEffect(() => {
-    if (!ranking.playerX) dispatch(loadRanking());
+    if (!ranking.playerX) dispatch(createRanking());
   }, []);
 
   useEffect(() => {

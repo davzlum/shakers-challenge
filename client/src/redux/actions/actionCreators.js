@@ -3,17 +3,17 @@ import actionTypes from './actionTypes';
 
 const url = process.env.REACT_APP_URL;
 
-export function loadRanking() {
+export function createRanking() {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(`${url}/rankings`);
       dispatch({
-        type: actionTypes.LOAD_RANKING,
+        type: actionTypes.CREATE_RANKING,
         ranking: data,
       });
     } catch (error) {
       dispatch({
-        type: actionTypes.LOAD_RANKING_ERROR,
+        type: actionTypes.CREATE_RANKING_ERROR,
       });
     }
   };

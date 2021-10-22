@@ -12,10 +12,10 @@ import './style.scss';
 const url = process.env.REACT_APP_URL;
 
 const Game = () => {
-  const dispatch = useDispatch();
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState('X');
   const [resultText, setResultText] = useState('');
+  const dispatch = useDispatch();
 
   const ranking = useSelector((store) => store.ranking);
   const message = useSelector((store) => store.message);
@@ -103,7 +103,6 @@ const Game = () => {
         ) : <div>{message.errorMessage}</div>}
       </div>
     </>
-
   );
 };
 

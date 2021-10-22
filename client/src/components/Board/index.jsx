@@ -10,6 +10,7 @@ const Board = ({ squares, squareClick, turn }) => {
         turn={turn}
         value={squares[value]}
         key={`square_${value}`}
+        position={value}
         squareClick={() => squareClick(value)}
       />
     ))

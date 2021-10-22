@@ -3,7 +3,7 @@ import actionTypes from './actionTypes';
 import {
   createRanking,
   handleError,
-  updateRanking,
+  updateRanking
 } from './actionCreators';
 
 jest.mock('axios');
@@ -16,7 +16,7 @@ describe('createRanking function', () => {
     await createRanking()(dispatch);
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.CREATE_RANKING,
-      ranking: { playerX: '' },
+      ranking: { playerX: '' }
     });
   });
   test('should dispatch CREATE_RANKING_ERROR', async () => {
@@ -24,7 +24,7 @@ describe('createRanking function', () => {
     const dispatch = jest.fn();
     await createRanking()(dispatch);
     expect(dispatch).toHaveBeenCalledWith({
-      type: actionTypes.CREATE_RANKING_ERROR,
+      type: actionTypes.CREATE_RANKING_ERROR
     });
   });
 });
@@ -39,7 +39,7 @@ describe('updateRanking function', () => {
     await updateRanking(player, ranking)(dispatch);
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.UPDATE_RANKING,
-      ranking: { playerX: 1 },
+      ranking: { playerX: 1 }
     });
   });
   test('should dispatch UPDATE_RANKING_ERROR', async () => {
@@ -47,7 +47,7 @@ describe('updateRanking function', () => {
     axios.put.mockRejectedValue();
     await updateRanking()(dispatch);
     expect(dispatch).toHaveBeenCalledWith({
-      type: actionTypes.UPDATE_RANKING_ERROR,
+      type: actionTypes.UPDATE_RANKING_ERROR
     });
   });
 });
@@ -59,7 +59,7 @@ describe('handleError function', () => {
     await handleError(errorMessage)(dispatch);
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.COMMON_ERROR,
-      message: { errorMessage: 'error', isError: true },
+      message: { errorMessage: 'error', isError: true }
     });
   });
 });

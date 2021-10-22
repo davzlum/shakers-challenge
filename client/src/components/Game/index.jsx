@@ -38,13 +38,13 @@ const Game = () => {
       if (data.isWinner) {
         endGame(data.player);
         setResultText(
-          <GameStatus turn={turn} isEndGame />,
+          <GameStatus turn={turn} isEndGame />
         );
         return;
       } if (data.isTie) {
         endGame(null);
         setResultText(
-          <GameStatus turn={null} isEndGame />,
+          <GameStatus turn={null} isEndGame />
         );
         return;
       }
@@ -64,7 +64,7 @@ const Game = () => {
     }
   }
 
-  const handleClick = (square) => {
+  const squareClick = (square) => {
     const newSquares = [...squares];
     newSquares.splice(square, 1, turn);
     setSquares(newSquares);
@@ -86,7 +86,7 @@ const Game = () => {
       <div className="container">
         {!message.errorMessage ? (
           <>
-            <Board turn={turn} squares={squares} onClick={handleClick} />
+            <Board turn={turn} squares={squares} squareClick={squareClick} />
             <div className="turn-board">
               {!resultText
                 ? (

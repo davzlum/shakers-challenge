@@ -33,7 +33,6 @@ const Ranking = () => {
                 /
                 {' '}
                 {gameCounter}
-
               </td>
             </tr>
             <tr>
@@ -44,7 +43,6 @@ const Ranking = () => {
                 /
                 {' '}
                 {gameCounter}
-
               </td>
               <td className="player-o">
                 {ranking.playerO.lost}
@@ -52,7 +50,6 @@ const Ranking = () => {
                 /
                 {' '}
                 {gameCounter}
-
               </td>
             </tr>
             <tr>
@@ -63,7 +60,6 @@ const Ranking = () => {
                 /
                 {' '}
                 {gameCounter}
-
               </td>
               <td className="player-o">
                 {ranking.playerO.tied}
@@ -71,7 +67,6 @@ const Ranking = () => {
                 /
                 {' '}
                 {gameCounter}
-
               </td>
             </tr>
           </table>

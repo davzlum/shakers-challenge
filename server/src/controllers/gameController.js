@@ -15,7 +15,7 @@ function gameController() {
   }
 
   return {
-    getWinner,
+    getWinner
   };
 }
 module.exports = gameController;

@@ -3,14 +3,14 @@ import { PropTypes } from 'prop-types';
 import Square from '../Square';
 import './style.scss';
 
-const Board = ({ squares, onClick, turn }) => {
+const Board = ({ squares, squareClick, turn }) => {
   const createSquares = (values) => (
     values.map((value) => (
       <Square
         turn={turn}
         value={squares[value]}
         key={`square_${value}`}
-        onClick={() => onClick(value)}
+        squareClick={() => squareClick(value)}
       />
     ))
   );
@@ -31,10 +31,14 @@ const Board = ({ squares, onClick, turn }) => {
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(
-    PropTypes.string,
+    PropTypes.string
   ).isRequired,
-  onClick: PropTypes.func.isRequired,
-  turn: PropTypes.string.isRequired,
+  squareClick: PropTypes.func.isRequired,
+  turn: PropTypes.string
+};
+
+Board.defaultProps = {
+  turn: null
 };
 
 export default Board;

@@ -4,7 +4,7 @@ import message from './messageReducer';
 
 const rootReducer = combineReducers({
   ranking,
-  message,
+  message
 });
 
 export default rootReducer;

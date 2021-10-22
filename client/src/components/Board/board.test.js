@@ -6,6 +6,6 @@ import Board from './index';
 describe('Board component', () => {
   render(<Board squares={[]} squareClick={jest.fn()} turn="X" />);
   test('Must render a board', async () => {
-    expect(screen.getAllByTestId('square-box')).toBeTruthy();
+    expect(screen.getByTestId('square-1')).toBeTruthy();
   });
 });

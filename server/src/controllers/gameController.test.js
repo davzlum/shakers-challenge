@@ -1,5 +1,5 @@
 const {
-  getWinner,
+  getWinner
 } = require('./gameController')();
 
 describe('getWinner', () => {
@@ -10,14 +10,14 @@ describe('getWinner', () => {
         newSquares: [
           'O', 'X', 'O',
           'O', 'X', 'X',
-          'X', 'O', 'X',
-        ],
-      },
+          'X', 'O', 'X'
+        ]
+      }
     };
     const res = {
       json: jest.fn().mockResolvedValueOnce({ isWinner: false, isTie: true }),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
     // act
     await getWinner(req, res);
@@ -28,7 +28,7 @@ describe('getWinner', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
 
     await getWinner(null, res);

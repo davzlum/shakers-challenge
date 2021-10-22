@@ -2,7 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 function rankingReducer(ranking = {}, action) {
   switch (action.type) {
-    case actionTypes.LOAD_RANKING:
+    case actionTypes.CREATE_RANKING:
       return action.ranking;
 
     case actionTypes.UPDATE_RANKING:

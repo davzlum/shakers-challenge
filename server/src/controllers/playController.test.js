@@ -1,5 +1,5 @@
 const {
-  getPlay,
+  getPlay
 } = require('./playController')();
 
 describe('getPlay', () => {
@@ -10,14 +10,14 @@ describe('getPlay', () => {
         actualSquares: [
           'O', null, null,
           'O', 'X', 'X',
-          null, null, 'X',
-        ],
-      },
+          null, null, 'X'
+        ]
+      }
     };
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
       // act
     await getPlay(req, res);
@@ -28,7 +28,7 @@ describe('getPlay', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
 
     await getPlay(null, res);

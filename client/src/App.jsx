@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Switch,
-  Route,
+  Route
 } from 'react-router-dom';
 import Ranking from './components/Ranking';
 import Game from './components/Game';

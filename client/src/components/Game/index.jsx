@@ -6,16 +6,16 @@ import Board from '../Board';
 import ScoreBoard from '../ScoreBoard';
 import GameStatus from '../GameStatus';
 import { player, cpu } from '../../assets/constants';
-import { updateRanking, loadRanking, handleError } from '../../redux/actions/actionCreators';
+import { updateRanking, createRanking, handleError } from '../../redux/actions/actionCreators';
 import './style.scss';
 
 const url = process.env.REACT_APP_URL;
 
 const Game = () => {
-  const dispatch = useDispatch();
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [turn, setTurn] = useState('X');
   const [resultText, setResultText] = useState('');
+  const dispatch = useDispatch();
 
   const ranking = useSelector((store) => store.ranking);
   const message = useSelector((store) => store.message);
@@ -38,13 +38,13 @@ const Game = () => {
       if (data.isWinner) {
         endGame(data.player);
         setResultText(
-          <GameStatus turn={turn} isEndGame />,
+          <GameStatus turn={turn} isEndGame />
         );
         return;
       } if (data.isTie) {
         endGame(null);
         setResultText(
-          <GameStatus turn={null} isEndGame />,
+          <GameStatus turn={null} isEndGame />
         );
         return;
       }
@@ -64,7 +64,7 @@ const Game = () => {
     }
   }
 
-  const handleClick = (square) => {
+  const squareClick = (square) => {
     const newSquares = [...squares];
     newSquares.splice(square, 1, turn);
     setSquares(newSquares);
@@ -72,7 +72,7 @@ const Game = () => {
   };
 
   useEffect(() => {
-    if (!ranking.playerX) dispatch(loadRanking());
+    if (!ranking.playerX) dispatch(createRanking());
   }, []);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const Game = () => {
       <div className="container">
         {!message.errorMessage ? (
           <>
-            <Board turn={turn} squares={squares} onClick={handleClick} />
+            <Board turn={turn} squares={squares} squareClick={squareClick} />
             <div className="turn-board">
               {!resultText
                 ? (
@@ -103,7 +103,6 @@ const Game = () => {
         ) : <div>{message.errorMessage}</div>}
       </div>
     </>
-
   );
 };
 

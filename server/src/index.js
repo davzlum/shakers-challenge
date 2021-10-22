@@ -15,7 +15,7 @@ const originHost = process.env.ORIGIN_HOST || 'http://localhost:3000';
 const app = express();
 app.disable('x-powered-by');
 const corsOptions = {
-  origin: originHost,
+  origin: originHost
 };
 
 app.use(cors(corsOptions));

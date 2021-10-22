@@ -5,9 +5,7 @@ function playController() {
   async function getPlay(req, res) {
     try {
       const { actualSquares } = req.body;
-      console.log(actualSquares, 'actual');
       const newSquares = autoPlay(actualSquares);
-      console.log(newSquares, 'new');
       res.json(newSquares);
     } catch (error) {
       res.status(404);
@@ -17,7 +15,7 @@ function playController() {
   }
 
   return {
-    getPlay,
+    getPlay
   };
 }
 module.exports = playController;

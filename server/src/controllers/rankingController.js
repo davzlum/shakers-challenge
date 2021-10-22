@@ -9,14 +9,14 @@ function rankingController() {
         playerX: {
           won: 0,
           lost: 0,
-          tied: 0,
+          tied: 0
         },
         playerO: {
           won: 0,
           lost: 0,
-          tied: 0,
-        },
-      },
+          tied: 0
+        }
+      }
     );
     try {
       await newRanking.save();
@@ -43,7 +43,7 @@ function rankingController() {
 
   return {
     createRanking,
-    updateRanking,
+    updateRanking
   };
 }
 

@@ -35,11 +35,11 @@ const GameStatus = ({ turn, isEndGame }) => (
 
 GameStatus.propTypes = {
   turn: PropTypes.string,
-  isEndGame: PropTypes.bool.isRequired,
+  isEndGame: PropTypes.bool.isRequired
 };
 
 GameStatus.defaultProps = {
-  turn: null,
+  turn: null
 };
 
 export default GameStatus;

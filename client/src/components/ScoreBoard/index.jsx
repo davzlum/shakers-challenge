@@ -11,7 +11,7 @@ const ScoreBoard = ({ scoreX, scoreO }) => (
 
 ScoreBoard.propTypes = {
   scoreX: PropTypes.number.isRequired,
-  scoreO: PropTypes.number.isRequired,
+  scoreO: PropTypes.number.isRequired
 };
 
 export default ScoreBoard;

@@ -19,3 +19,10 @@
     background-color: $color-player-o;
     border-radius: 50%;
 }
+
+@media(min-width:1200px){
+    .square{
+        width: 150px;
+        height: 150px;
+    }
+}

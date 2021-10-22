@@ -1,6 +1,6 @@
 const {
   createRanking,
-  updateRanking,
+  updateRanking
 } = require('./rankingController')();
 
 const Ranking = require('../model/rankingModel');
@@ -14,10 +14,10 @@ describe('createRanking', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
     const req = {
-      body: null,
+      body: null
     };
     // act
     await createRanking(req, res);
@@ -28,13 +28,13 @@ describe('createRanking', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
     const req = {
-      body: null,
+      body: null
     };
     Ranking.mockReturnValueOnce({
-      save: jest.fn().mockRejectedValueOnce('error'),
+      save: jest.fn().mockRejectedValueOnce('error')
     });
     await createRanking(req, res);
     expect(res.send).toHaveBeenCalledWith('error');
@@ -47,15 +47,15 @@ describe('updateRanking', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
     const req = {
       body: {
         player: '',
         ranking: {
-          _id: '',
-        },
-      },
+          _id: ''
+        }
+      }
     };
       // act
     Ranking.findByIdAndUpdate.mockResolvedValueOnce();
@@ -67,15 +67,15 @@ describe('updateRanking', () => {
     const res = {
       json: jest.fn(),
       status: jest.fn(),
-      send: jest.fn(),
+      send: jest.fn()
     };
     const req = {
       body: {
         player: '',
         ranking: {
-          _id: null,
-        },
-      },
+          _id: null
+        }
+      }
     };
     Ranking.findByIdAndUpdate.mockRejectedValueOnce('error');
     await updateRanking(req, res);

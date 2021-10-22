@@ -8,11 +8,16 @@ describe('Given an autoPlay function', () => {
     null, 'X', null,
     null, null, null
   ];
-  test('if cpu can not win the game', () => {
-    const newBoard = autoPlay(actualSquares);
+  test('if player can win the game', () => {
+    const playerWinBoard = [
+      'O', null, null,
+      null, 'X', 'X',
+      null, null, null
+    ];
+    const newBoard = autoPlay(playerWinBoard);
     const expected = [
-      'O', 'O', null,
-      null, 'X', null,
+      'O', null, null,
+      'O', 'X', 'X',
       null, null, null
     ];
     expect(newBoard).toEqual(expected);

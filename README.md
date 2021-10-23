@@ -14,8 +14,8 @@ board with the objective of making 3 in a row.
 
 ### Screenshots
 ***
-![Game screen](https://i.ibb.co/vBBqm1H/Captura-de-pantalla-2021-10-23-a-las-17-12-46.png)
-![Ranking screen](https://i.ibb.co/X7QQFpC/Captura-de-pantalla-2021-10-23-a-las-17-12-58.png)
+![Game screen](https://i.ibb.co/P9B6KMn/Captura-de-pantalla-2021-10-23-a-las-17-45-49.png)
+![Ranking screen](https://i.ibb.co/s57b3sN/Captura-de-pantalla-2021-10-23-a-las-17-45-55.png)
 
 ## Installation
 ***

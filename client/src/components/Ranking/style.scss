@@ -1,10 +1,8 @@
 @import './../../styles/color.scss';
+@import './../../styles/mixin.scss';
 
 .ranking-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
+    @include flex-content(flex, column, center, center);
     height: 100vh;
 }
 
@@ -12,9 +10,8 @@
     font-size: 22px;
     border-spacing: 0;
     th, td{
+    @include size(120px, 100px);
     text-align: center;
-    width: 120px;
-    height: 100px;
     }
     .row-category{
         background-color: $color-neutral;
@@ -26,16 +23,14 @@
         background-color: $color-player-o;
     }
     .icon-x{
+        @include size(50px, 50px);
         margin: auto;
-        width: 50px;
-        height: 50px;
         background-color: $color-player-x;
         clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
     }
     .icon-o{
+        @include size(50px, 50px);
         margin: auto;
-        width: 50px;
-        height: 50px;
         border-radius: 50%;
         background-color: $color-player-o;
     }

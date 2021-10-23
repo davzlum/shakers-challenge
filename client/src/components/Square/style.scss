@@ -3,6 +3,7 @@
 
 .square{
     @include size(100px, 100px);
+    cursor: pointer;
     background-color: $color-neutral;
     margin: 5px;
     transition: all .2s;

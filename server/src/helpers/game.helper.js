@@ -1,4 +1,5 @@
 const winningPositions = require('../const/winningPositions');
+const { player, cpu } = require('../const/constants');
 
 const checkForWinner = (newSquares) => {
   let result = {
@@ -44,20 +45,20 @@ const simulate = (actualSquares, playerToCheck) => {
 
 const autoPlay = (actualSquares) => {
   const newSquares = [...actualSquares];
-  const cpuSimulation = simulate(actualSquares, 'O');
+  const cpuSimulation = simulate(actualSquares, cpu);
   if (cpuSimulation.isWinner) {
-    newSquares[cpuSimulation.position] = 'O';
+    newSquares[cpuSimulation.position] = cpu;
   } else {
-    const playerSimulation = simulate(actualSquares, 'X');
+    const playerSimulation = simulate(actualSquares, player);
     if (playerSimulation.isWinner) {
-      newSquares[playerSimulation.position] = 'O';
+      newSquares[playerSimulation.position] = cpu;
     } else {
       for (let i = 0; i < actualSquares.length; i += 1) {
         if (!actualSquares[4]) {
-          newSquares[4] = 'O';
+          newSquares[4] = cpu;
           break;
         } else if (actualSquares[4] && !actualSquares[i]) {
-          newSquares[i] = 'O';
+          newSquares[i] = cpu;
           break;
         }
       }

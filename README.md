@@ -23,6 +23,8 @@ Follow the next steps to run the project on your computer:
 - Run the project with `npm start` in two terminals, one for client and other for server
 - Now you are ready to play! Your ranking would be stored on your mongo database.
 
+- Run tests for server and client with `npm test`
+
 
 ## Technologies
 ***

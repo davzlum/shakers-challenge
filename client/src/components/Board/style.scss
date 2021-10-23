@@ -1,8 +1,9 @@
+@import './../../styles/mixin.scss';
+
 .board{
-    display:flex;
-    flex-direction: column;
+    @include flex-content(flex, column, null, null);
 }
     
 .row{
-    display:flex;
+    @include flex-content(flex, null, null, null);
 }

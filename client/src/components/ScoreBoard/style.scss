@@ -1,20 +1,26 @@
 @import './../../styles/color.scss';
+@import './../../styles/mixin.scss';
 
 .score-board{
+    @include flex-content(flex, row, null, null);
     width: 320px;
-    display: flex;
-    flex-direction: row;
     margin-top: 5px;
     div {
         width: 100%;
-        color: $color-text;
-        text-align: center;
         font-size: 2em;
         padding: 5px;
+        text-align: center;
         font-weight: bold;
+        color: $color-text;
         background-color: $color-player-o;
     }
     div:first-child{
         background-color: $color-player-x;
+    }
+}
+
+@media(min-width:1280px){
+    .score-board{
+        width: 470px;
     }
 }

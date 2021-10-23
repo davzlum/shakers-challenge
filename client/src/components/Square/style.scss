@@ -1,8 +1,8 @@
 @import './../../styles/color.scss';
+@import './../../styles/mixin.scss';
 
 .square{
-    width: 100px;
-    height: 100px;
+    @include size(100px, 100px);
     background-color: $color-neutral;
     margin: 5px;
     transition: all .2s;
@@ -20,9 +20,8 @@
     border-radius: 50%;
 }
 
-@media(min-width:1200px){
+@media(min-width:1280px){
     .square{
-        width: 150px;
-        height: 150px;
+        @include size(150px, 150px);
     }
 }

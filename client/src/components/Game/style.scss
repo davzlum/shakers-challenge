@@ -1,19 +1,14 @@
 @import './../../styles/color.scss';
+@import './../../styles/mixin.scss';
 
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-content(flex, column, center, center);
     height: 100vh;
 }
 
 .turn-board{
-    display: flex;
-    flex-direction: row;
+    @include flex-content(flex, row, space-around, center);
     width: 320px;
-    justify-content: space-around;
-    align-items: center;
     margin: 10px 0;
     h2{
         color: $color-text;
